@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Viandas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍽️ Gestor de Viandas</h1>
+            <p>Administra tus clientes y pedidos fácilmente</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="mostrarTab('clientes')">👥 Clientes</button>
+            <button class="tab-btn" onclick="mostrarTab('menu')">📋 Menú</button>
+            <button class="tab-btn" onclick="mostrarTab('pedidos')">🛒 Pedidos</button>
+            <button class="tab-btn" onclick="mostrarTab('resumen')">📊 Resumen</button>
+        </nav>
+
+        <!-- TAB: CLIENTES -->
+        <section id="clientes" class="tab-content active">
+            <h2>Gestión de Clientes</h2>
+            
+            <div class="form-section">
+                <h3>Agregar Nuevo Cliente</h3>
+                <form id="formCliente">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre *</label>
+                            <input type="text" id="clienteNombre" required placeholder="Ej: Juan Pérez">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono *</label>
+                            <input type="tel" id="clienteTelefono" required placeholder="Ej: +54 9 11 1234-5678">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Dirección *</label>
+                            <input type="text" id="clienteDireccion" required placeholder="Ej: Calle Principal 123, Apt 4B">
+                        </div>
+                        <div class="form-group">
+                            <label>Horario de Entrega *</label>
+                            <select id="clienteHorario" required>
+                                <option value="">Selecciona un horario</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                                <option value="18:00">18:00</option>
+                                <option value="19:00">19:00</option>
+                                <option value="20:00">20:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group checkbox">
+                            <label>
+                                <input type="checkbox" id="clienteSinSal">
+                                ✓ Cliente SIN SAL
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">➕ Agregar Cliente</button>
+                </form>
+            </div>
+
+            <div class="list-section">
+                <h3>Lista de Clientes</h3>
+                <div id="listaClientes" class="client-list">
+                    <p class="empty-state">No hay clientes aún</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: MENÚ -->
+        <section id="menu" class="tab-content">
+            <h2>Menú Semanal</h2>
+            
+            <div class="form-section">
+                <h3>Agregar Plato al Menú</h3>
+                <form id="formPlato">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre del Plato *</label>
+                            <input type="text" id="platoNombre" required placeholder="Ej: Pollo a la Mostaza">
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <input type="text" id="platoDescripcion" placeholder="Ej: Con papas y ensalada">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Precio ($) *</label>
+                            <input type="number" id="platoPrecio" required placeholder="Ej: 150" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Día de la Semana *</label>
+                            <select id="platoDia" required>
+                                <option value="">Selecciona un día</option>
+                                <option value="Lunes">Lunes</option>
+                                <option value="Martes">Martes</option>
+                                <option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option>
+                                <option value="Viernes">Viernes</option>
+                                <option value="Sábado">Sábado</option>
+                                <option value="Domingo">Domingo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">➕ Agregar Plato</button>
+                </form>
+            </div>
+
+            <div class="list-section">
+                <h3>Platos del Menú</h3>
+                <div id="listaPlatos" class="plato-list">
+                    <p class="empty-state">No hay platos en el menú</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: PEDIDOS -->
+        <section id="pedidos" class="tab-content">
+            <h2>Registro de Pedidos</h2>
+            
+            <div class="form-section">
+                <h3>Nuevo Pedido</h3>
+                <form id="formPedido">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Cliente *</label>
+                            <select id="pedidoCliente" required>
+                                <option value="">Selecciona un cliente</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Plato *</label>
+                            <select id="pedidoPlato" required>
+                                <option value="">Selecciona un plato</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Cantidad *</label>
+                            <input type="number" id="pedidoCantidad" required min="1" value="1" placeholder="Ej: 2">
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha de Entrega *</label>
+                            <input type="date" id="pedidoFecha" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Notas especiales</label>
+                            <input type="text" id="pedidoNotas" placeholder="Ej: Sin picante, extra sal, etc.">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">➕ Agregar Pedido</button>
+                </form>
+            </div>
+
+            <div class="list-section">
+                <h3>Pedidos Registrados</h3>
+                <div id="listaPedidos" class="pedido-list">
+                    <p class="empty-state">No hay pedidos registrados</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: RESUMEN -->
+        <section id="resumen" class="tab-content">
+            <h2>Resumen de Preparación</h2>
+            
+            <div class="form-section">
+                <h3>Filtrar por Fecha</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha *</label>
+                        <input type="date" id="resumenFecha" required>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="filtrarResumen()">🔍 Filtrar</button>
+                </div>
+            </div>
+
+            <div class="list-section">
+                <h3>Platos a Preparar</h3>
+                <div id="resumenContenido" class="resumen-list">
+                    <p class="empty-state">Selecciona una fecha para ver el resumen</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
